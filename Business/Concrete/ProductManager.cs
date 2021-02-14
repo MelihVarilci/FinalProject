@@ -22,22 +22,22 @@ namespace Business.Concrete
         public List<Product> GetAll()
         {
             // İş kodları
-            return _ProductDal.GetAll();
+            return _productDal.GetAll();
         }
 
         public List<Product> GetAllByCategoryId(int id)
         {
-            return _ProductDal.GetAll(p=>p.CategoryId==id);
+            return _productDal.GetAll(p=>p.CategoryId==id);
         }
 
         public List<Product> GetByUnitPrice(decimal min, decimal max)
         {
-            return _ProductDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
+            return _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
         }
 
         public List<ProductDetailDto> GetProductDetail()
         {
-            return _ProductDal.GetProductDetail();
+            return _productDal.GetProductDetail();
         }
     }
 }
