@@ -30,7 +30,8 @@ namespace WebAPI.Controllers
         {
             // Swagger
             // Dependency chain --
-            IProductService productService = new ProductManager(new EfProductDal());
+            IProductService productService = new ProductManager(new EfProductDal(),
+                new CategoryManager(new EfCategoryDal()));
             var result= productService.GetAll();
             if (result.Success)
             {
