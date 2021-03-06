@@ -1,14 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Business.Abstract;
-using Business.Concrete;
-using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
+﻿using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
@@ -16,8 +8,9 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        // Loosely coupled
-        // IoC Container -- Inversion of Control
+        //Loosely coupled
+        //naming convention
+        //IoC Container -- Inversion of Control
         IProductService _productService;
 
         public ProductsController(IProductService productService)
@@ -28,16 +21,15 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            // Swagger
-            // Dependency chain --
-            IProductService productService = new ProductManager(new EfProductDal(),
-                new CategoryManager(new EfCategoryDal()));
-            var result= productService.GetAll();
+            //Swagger
+            //Dependency chain --
+            var result = _productService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
 
         [HttpGet("getbyid")]
@@ -51,6 +43,7 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
         [HttpPost("add")]
         public IActionResult Add(Product product)
         {
@@ -59,8 +52,9 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
-
             return BadRequest(result);
         }
+
+
     }
 }
